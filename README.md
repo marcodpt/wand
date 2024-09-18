@@ -44,7 +44,8 @@ change and must return a object whose properties will be attached to
  - `runtime` **change => finish?**:
 The router `runtime`.
    - `change` **url => ()**:
-Whenever called, it will trigger a `change` of `route`.
+Whenever called, it will trigger a `change` of `route`, with the `url` being
+associated with the `state`.
    - `finish` **state => ()**:
 Optional function to terminate the `runtime`, receives the current `state` of
 the `route` as a parameter.
@@ -55,7 +56,7 @@ Calls the `finish` function of the `runtime` with the contents of the current
 
 #### state {url, route, path, Params, query, Query, ...newData}
  - `url` **string**: 
-The `url` as it was passed.
+The `url` as passed to the `change` function.
  - `route` **string**:
 The `route` that matched as declared.
  - `path` **string**:

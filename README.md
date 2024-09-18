@@ -12,7 +12,7 @@
  - Designed following the principles of
 [UNIX philosophy](https://en.wikipedia.org/wiki/Unix_philosophy).
  - Tiny codebase, very understandable.
- - Very well tested with [Zora](https://github.com/lorenzofox3/zora).
+ - Very well tested.
  - Ridiculously small API. After reading this file you will understand `Wand`
 better than me.
 
@@ -23,7 +23,7 @@ example can be easily migrated to a server-side router or any other type of
 application.
 
 ```js
-import wand from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.min.js"
+import wand from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
 ```
 
 ## 📖 API
@@ -32,22 +32,28 @@ import wand from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.min.js"
  - `routes` **{route: action}**:
    - `route` **string**:
 Accepts `*` to match any path and `:param` to declare variable.
-   - `action` **routeData => done**: 
-A function that will be called every time the route is started, returning the initial state.
-     - `done` **newState => ()**:
- - `plugins` **[routeData => {...newData, ...routeData}]**:
+   - `action` **state => done?**: 
+A function that will be called every time `route` is matched.
+     - `done` **state => ()**:
+An optional function that will be called before the new `route` `action`, with
+the `state` of the new `route` to end the current `route`.
+ - `plugins` **[state => {...newData, ...state}]**:
 An optional array of plugins, which are executed sequentially with each route
 change and must return a object whose properties will be attached to
-`routeData`.
- - `runtime` **change => finish**:
+`state`.
+ - `runtime` **change => finish?**:
+The router `runtime`.
    - `change` **url => ()**:
-   - `finish` **routeData => ()**:
+Whenever called, it will trigger a `change` of `route`.
+   - `finish` **state => ()**:
+Optional function to terminate the `runtime`, receives the current `state` of
+the `route` as a parameter.
  - `stop` **() => ()**:
 Calls the `finish` function of the `runtime` with the contents of the current
-`routeData`, and from then on any call to the `change` function within the
+`state`, and from then on any call to the `change` function within the
 `runtime` will be ignored.
 
-#### routeData {url, route, path, Params, query, Query, ...newData, previous}
+#### state {url, route, path, Params, query, Query, ...newData}
  - `url` **string**: 
 The `url` as it was passed.
  - `route` **string**:
@@ -63,8 +69,6 @@ The part of `url` after the `?`.
 Parsed query string.
  - `newData`
 New properties introduced by plugins.
- - `previous` **routeData**:
-Previous `routeData` or `null`.
 
 ## 🤝 Contributing
 It's a very simple project.

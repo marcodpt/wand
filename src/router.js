@@ -1,8 +1,13 @@
-export default (routes, plugins) => {
-  var done = null
-  var previous = null
+export default ({routes, plugins, runtime}) => {
+  var done = () => {} 
+  var state = null
+  var isRunning = true
 
-  return url => {
+  const change = url => {
+    if (!isRunning) {
+      return
+    }
+
     const Url = url.split('?')
     const path = Url.shift()
     const Path = path.split('/').map(decodeURIComponent)
@@ -39,19 +44,25 @@ export default (routes, plugins) => {
       weight: 0
     })
 
-    if (typeof routes[route] == 'function') {
-      const state = plugins.
+    const action = routes[route]
+    if (typeof action == 'function') {
+      state = plugins.
         filter(plugin => typeof plugin == 'function').
         reduce((state, plugin) => ({
           ...(plugin(state) || {}),
           ...state
         }), {url, route, path, Params, query})
 
-      if (typeof done == 'function') {
-        done(state)
-      }
-      done = routes[route](state)
-      previous = state
+      done(state)
+      done = action(state) || (() => {})
     }
+  }
+
+  const finish = runtime(change) || (() => {})
+
+  return () => {
+    isRunning = false
+    done(state)
+    finish(state)
   }
 }

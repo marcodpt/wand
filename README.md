@@ -6,7 +6,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## ❤️ Features
- - ES6 module.
+ - [ES6 module](https://github.com/marcodpt/wand/blob/main/index.js).
  - Support browser and any javascript runtime
 ([node](https://nodejs.org/en), [deno](https://deno.com/), etc).
  - Pure functional design.
@@ -16,7 +16,7 @@ very understandable.
 [plugin](https://github.com/marcodpt/wand/blob/main/src/queryParser.js).
  - Designed following the principles of
 [UNIX philosophy](https://en.wikipedia.org/wiki/Unix_philosophy).
- - Very well tested.
+ - Very well [tested](https://marcodpt.github.io/wand/tests/).
  - Ridiculously small [API](#-api). After reading this file you will
 understand `Wand` better than me.
 

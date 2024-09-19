@@ -3,7 +3,10 @@ import wand from '../index.js'
 QUnit.test('runtime', assert => {
   const done = assert.async()
   const H = []
+
+  assert.deepEqual(H, [])
   const stop = wand({
+    init: () => {H.push('init')},
     routes: {
       'a': ({url}) => {
         H.push('a (action): '+url)
@@ -14,73 +17,132 @@ QUnit.test('runtime', assert => {
         return ({url}) => {H.push('b (done): '+url)}
       }
     },
+    plugins: [
+      ({url}) => {H.push('p1: '+url)},
+      ({url}) => {H.push('p2: '+url)}
+    ],
     runtime: change => {
-      assert.deepEqual(H, [])
+      assert.deepEqual(H, [
+        'init'
+      ])
 
       change('c')
-      assert.deepEqual(H, [])
+      assert.deepEqual(H, [
+        'init'
+      ])
 
       change('a')
       assert.deepEqual(H, [
+        'init',
+        'p1: a',
+        'p2: a',
         'a (action): a'
       ])
 
       change('b')
       assert.deepEqual(H, [
+        'init',
+        'p1: a',
+        'p2: a',
         'a (action): a',
+        'p1: b',
+        'p2: b',
         'a (done): b',
         'b (action): b'
       ])
 
       change('c')
       assert.deepEqual(H, [
+        'init',
+        'p1: a',
+        'p2: a',
         'a (action): a',
+        'p1: b',
+        'p2: b',
         'a (done): b',
         'b (action): b'
       ])
 
       change('b')
       assert.deepEqual(H, [
+        'init',
+        'p1: a',
+        'p2: a',
         'a (action): a',
+        'p1: b',
+        'p2: b',
         'a (done): b',
         'b (action): b',
+        'p1: b',
+        'p2: b',
         'b (done): b',
         'b (action): b'
       ])
 
       change('a')
       assert.deepEqual(H, [
+        'init',
+        'p1: a',
+        'p2: a',
         'a (action): a',
+        'p1: b',
+        'p2: b',
         'a (done): b',
         'b (action): b',
+        'p1: b',
+        'p2: b',
         'b (done): b',
         'b (action): b',
+        'p1: a',
+        'p2: a',
         'b (done): a',
         'a (action): a'
       ])
 
       change('a')
       assert.deepEqual(H, [
+        'init',
+        'p1: a',
+        'p2: a',
         'a (action): a',
+        'p1: b',
+        'p2: b',
         'a (done): b',
         'b (action): b',
+        'p1: b',
+        'p2: b',
         'b (done): b',
         'b (action): b',
+        'p1: a',
+        'p2: a',
         'b (done): a',
         'a (action): a',
+        'p1: a',
+        'p2: a',
         'a (done): a',
         'a (action): a'
       ])
 
       change('c')
       assert.deepEqual(H, [
+        'init',
+        'p1: a',
+        'p2: a',
         'a (action): a',
+        'p1: b',
+        'p2: b',
         'a (done): b',
         'b (action): b',
+        'p1: b',
+        'p2: b',
         'b (done): b',
         'b (action): b',
+        'p1: a',
+        'p2: a',
         'b (done): a',
         'a (action): a',
+        'p1: a',
+        'p2: a',
         'a (done): a',
         'a (action): a'
       ])
@@ -88,13 +150,24 @@ QUnit.test('runtime', assert => {
       setTimeout(() => {
         stop()
         assert.deepEqual(H, [
+          'init',
+          'p1: a',
+          'p2: a',
           'a (action): a',
+          'p1: b',
+          'p2: b',
           'a (done): b',
           'b (action): b',
+          'p1: b',
+          'p2: b',
           'b (done): b',
           'b (action): b',
+          'p1: a',
+          'p2: a',
           'b (done): a',
           'a (action): a',
+          'p1: a',
+          'p2: a',
           'a (done): a',
           'a (action): a',
           'a (done): a',
@@ -103,13 +176,24 @@ QUnit.test('runtime', assert => {
 
         change('c')
         assert.deepEqual(H, [
+          'init',
+          'p1: a',
+          'p2: a',
           'a (action): a',
+          'p1: b',
+          'p2: b',
           'a (done): b',
           'b (action): b',
+          'p1: b',
+          'p2: b',
           'b (done): b',
           'b (action): b',
+          'p1: a',
+          'p2: a',
           'b (done): a',
           'a (action): a',
+          'p1: a',
+          'p2: a',
           'a (done): a',
           'a (action): a',
           'a (done): a',
@@ -118,13 +202,24 @@ QUnit.test('runtime', assert => {
 
         change('b')
         assert.deepEqual(H, [
+          'init',
+          'p1: a',
+          'p2: a',
           'a (action): a',
+          'p1: b',
+          'p2: b',
           'a (done): b',
           'b (action): b',
+          'p1: b',
+          'p2: b',
           'b (done): b',
           'b (action): b',
+          'p1: a',
+          'p2: a',
           'b (done): a',
           'a (action): a',
+          'p1: a',
+          'p2: a',
           'a (done): a',
           'a (action): a',
           'a (done): a',
@@ -133,13 +228,24 @@ QUnit.test('runtime', assert => {
 
         change('a')
         assert.deepEqual(H, [
+          'init',
+          'p1: a',
+          'p2: a',
           'a (action): a',
+          'p1: b',
+          'p2: b',
           'a (done): b',
           'b (action): b',
+          'p1: b',
+          'p2: b',
           'b (done): b',
           'b (action): b',
+          'p1: a',
+          'p2: a',
           'b (done): a',
           'a (action): a',
+          'p1: a',
+          'p2: a',
           'a (done): a',
           'a (action): a',
           'a (done): a',

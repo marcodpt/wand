@@ -1,8 +1,10 @@
 import router from './src/router.js'
 import queryParser from './src/queryParser.js'
 
-export default ({routes, plugins, runtime}) => router({
+export default ({init, routes, plugins, runtime}) => router({
+  init: typeof init == 'function' ? init : (() => ({})),
   routes,
   runtime,
-  plugins: [queryParser].concat(plugins || [])
+  plugins: [queryParser].concat(plugins || []).
+    filter(plugin => typeof plugin == 'function')
 })

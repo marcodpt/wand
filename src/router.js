@@ -1,6 +1,7 @@
-export default ({routes, plugins, runtime}) => {
-  var done = () => {} 
-  var state = null
+export default ({init, routes, plugins, runtime}) => {
+  const nothing = () => {}
+  var done = nothing
+  const state = init() || {}
   var isRunning = true
 
   const change = url => {
@@ -46,19 +47,18 @@ export default ({routes, plugins, runtime}) => {
 
     const action = routes[route]
     if (typeof action == 'function') {
-      state = plugins.
-        filter(plugin => typeof plugin == 'function').
-        reduce((state, plugin) => ({
-          ...(plugin(state) || {}),
-          ...state
-        }), {url, route, path, Params, query})
-
+      state.url = url
+      state.route = route
+      state.path = path
+      state.Params = Params
+      state.query = query
+      plugins.forEach(plugin => plugin(state))
       done(state)
-      done = action(state) || (() => {})
+      done = action(state) || nothing
     }
   }
 
-  const finish = runtime(change) || (() => {})
+  const finish = runtime(change) || nothing
 
   return () => {
     isRunning = false

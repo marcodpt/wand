@@ -6,7 +6,8 @@
 
 ## ❤️ Features
  - ES6 module.
- - Support browser and any javascript runtime (node, deno, etc).
+ - Support browser and any javascript runtime
+([node](https://nodejs.org/en), [deno](https://deno.com/), etc).
  - Pure functional design.
  - Everything is a plugin.
  - Designed following the principles of
@@ -28,48 +29,71 @@ import wand from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
 
 ## 📖 API
 
-### wand({routes, plugins?, runtime}) => stop
- - `routes` **{route: action}**:
-   - `route` **string**:
+### wand({init?, routes, plugins?, runtime}) => stop
+
+#### init: () => state
+Optional function called once to create the initial `state`
+(this must be an `object`).
+
+#### routes: {route: action}
+Object that defines the possible `routes`.
+
+##### route: string
 Accepts `*` to match any path and `:param` to declare variable.
-   - `action` **state => done?**: 
-A function that will be called every time `route` is matched.
-     - `done` **state => ()**:
+
+##### action: state => done?
+A function that will be called whenever `route` is matched in a route `change`.
+
+##### done: state => ()
 An optional function that will be called before the new `route` `action`, with
 the `state` of the new `route` to end the current `route`.
- - `plugins` **[state => {...newData, ...state}]**:
-An optional array of plugins, which are executed sequentially with each route
-change and must return a object whose properties will be attached to
-`state`.
- - `runtime` **change => finish?**:
+
+#### plugins: [state => ()]
+An optional array of `plugins`, which are executed sequentially with each
+`route` `change` and which can modify the `state` before the `action`
+associated with the `route` is called.
+
+#### runtime: change => finish?
 The router `runtime`.
-   - `change` **url => ()**:
-Whenever called, it will trigger a `change` of `route`, with the `url` being
-associated with the `state`.
-   - `finish` **state => ()**:
+
+##### change: url => ()
+Whenever called, it will trigger a `change` of `route`, with the
+`url` (`string`) being associated with the `state`.
+
+##### finish: state => ()
 Optional function to terminate the `runtime`, receives the current `state` of
 the `route` as a parameter.
- - `stop` **() => ()**:
+
+#### stop: () => ()
 Calls the `finish` function of the `runtime` with the contents of the current
 `state`, and from then on any call to the `change` function within the
 `runtime` will be ignored.
 
-#### state {url, route, path, Params, query, Query, ...newData}
- - `url` **string**: 
+### state: object
+The state is initialized by the `init` function or as an empty `object`
+(if this is not passed).
+
+Listed here are the `state` properties that are modified with each `route`
+`change`. Note that `plugins` can also modify `state` properties.
+
+#### url: string
 The `url` as passed to the `change` function.
- - `route` **string**:
+
+#### route: string
 The `route` that matched as declared.
- - `path` **string**:
+
+#### path: string
 The part of the `url` before the `?`.
- - `Params` **Object**: 
+
+#### Params: object
 Object containing the variables declared in the `route` with the associated
 values in the current `path`.
- - `query` **string**:
+
+#### query: string
 The part of `url` after the `?`.
- - `Query` **Object**:
+
+#### Query: object
 Parsed query string.
- - `newData`
-New properties introduced by plugins.
 
 ## 🤝 Contributing
 It's a very simple project.

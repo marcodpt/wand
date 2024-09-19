@@ -1,5 +1,5 @@
-export default ({query}) => ({
-  Query: query.split('&')
+export default state => {
+  state.Query = state.query.split('&')
     .map(pair => pair.split('='))
     .map(pair => ({
       key: decodeURIComponent(pair.shift()),
@@ -18,4 +18,4 @@ export default ({query}) => ({
       }
       return Q
     }, {})
-})
+}

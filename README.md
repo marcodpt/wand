@@ -2,22 +2,28 @@
 
   A tiny JS router that makes no assumptions about its usage.
 
+  [![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/wand/)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-  [Demo](https://marcodpt.github.io/wand/)
 
 ## ❤️ Features
  - ES6 module.
  - Support browser and any javascript runtime
 ([node](https://nodejs.org/en), [deno](https://deno.com/), etc).
  - Pure functional design.
- - Everything is a plugin.
+ - [Tiny codebase](https://github.com/marcodpt/wand/blob/main/src/router.js),
+very understandable.
+ - Everything is a
+[plugin](https://github.com/marcodpt/wand/blob/main/src/queryParser.js).
  - Designed following the principles of
 [UNIX philosophy](https://en.wikipedia.org/wiki/Unix_philosophy).
- - Tiny codebase, very understandable.
  - Very well tested.
- - Ridiculously small API. After reading this file you will understand `Wand`
-better than me.
+ - Ridiculously small [API](#-api). After reading this file you will
+understand `Wand` better than me.
+
+## 💻 Usage
+```js
+import wand from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
+```
 
 ## 💡 Showcase: A hash router
 
@@ -25,8 +31,8 @@ better than me.
 example can be easily migrated to a server-side router or any other type of
 application.
 
-[Demo](https://marcodpt.github.io/wand/)
-[Source](https://github.com/marcodpt/wand/blob/main/index.html)
+[![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/wand/)
+[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/wand/blob/main/index.html)
 
 ```html
 <body>
@@ -159,7 +165,7 @@ Calls the `finish` function of the `runtime` with the contents of the current
 
 ### state: object
 The state is initialized by the `init` function or as an empty `object`
-(if this is not passed).
+(if `init` is not passed).
 
 Listed here are the `state` properties that are modified with each `route`
 `change`. Note that `plugins` can also modify `state` properties.
@@ -182,6 +188,15 @@ The part of `url` after the `?`.
 
 #### Query: object
 Parsed query string.
+
+## 📦 Projects using this module
+If your project is not on the list, submit a pull request, it is a way to
+increase awareness of your project and this module.
+
+ - [Merlin](https://github.com/marcodpt/merlin): A functional JS framework that
+values elegance, simplicity and minimalism. 
+ - [Paw](https://github.com/marcodpt/paw): A low-code, vdom-free hyperscript
+framework.
 
 ## 🤝 Contributing
 It's a very simple project.

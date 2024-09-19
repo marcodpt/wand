@@ -4,6 +4,8 @@
 
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+  [Demo](https://marcodpt.github.io/wand/)
+
 ## ❤️ Features
  - ES6 module.
  - Support browser and any javascript runtime
@@ -24,96 +26,92 @@ example can be easily migrated to a server-side router or any other type of
 application.
 
 [Demo](https://marcodpt.github.io/wand/)
+[Source](https://github.com/marcodpt/wand/blob/main/index.html)
 
 ```html
-<html>
-  <head>
-    <title>Wand JS router</title>
-  </head>
-  <body>
-    <nav>
-      <a href="#/">Home</a> |
-      <a href="#/hello/Mary">Hello Mary</a> |
-      <a
-        href="#/hello/John?age=25&pets[]=dog&pets[]=cat"
-      >Hello John</a> |
-      <a href="#/goodbye?name=stranger">Goodbye</a> |
-      <a href="#/clock">Clock</a> |
-      <a href="#/wrong/route">404</a> |
-      <a href="javascript:stop()">Stop Router</a> |
-      <a href="https://github.com/marcodpt/wand">Repository</a>
-    </nav>
-    <main>
-      <h1>Home Page</h1>
-    </main>
-    <pre>
-      <code></code>
-    </pre>
-    <script type="module">
-      import wand from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
+<body>
+  <nav>
+    <a href="#/">Home</a> |
+    <a href="#/hello/Mary">Hello Mary</a> |
+    <a
+      href="#/hello/John?age=25&pets[]=dog&pets[]=cat"
+    >Hello John</a> |
+    <a href="#/goodbye?name=stranger">Goodbye</a> |
+    <a href="#/clock">Clock</a> |
+    <a href="#/wrong/route">404</a> |
+    <a href="javascript:stop()">Stop Router</a> |
+    <a href="https://github.com/marcodpt/wand">Repository</a>
+  </nav>
+  <main>
+    <h1>Home Page</h1>
+  </main>
+  <pre>
+    <code></code>
+  </pre>
+  <script type="module">
+    import wand from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
 
-      window.stop = wand({
-        init: () => {
-          const main = document.body.querySelector('main')
-          return {
-            index: 0,
-            home: main.innerHTML.trim(),
-            render: html => {main.innerHTML = html}
-          }
-        },
-        routes: {
-          '/': ({
-            render, home
-          }) => render(home),
-          '/hello/:name': ({
-            render, Params
-          }) => render(`<h1>Hello ${Params.name}</h1>`),
-          '/clock': ({render}) => {
-            const tick = () => {
-              console.log('tick')
-              const time = new Date()
-              render(`<h1>${[
-                time.getHours(),
-                time.getMinutes(),
-                time.getSeconds()
-              ].map(n => (n < 10 ? '0' : '')+n).join(':')}</h1>`)
-            }
-            const itv = setInterval(tick, 100)
-            return () => {clearInterval(itv)}
-          },
-          '/goodbye': ({render, Query}) => {
-            render(`<h1>Goodbye message before leaving!</h1>`)
-            return () => {window.alert(`Goodbye ${Query.name}!`)}
-          },
-          '*': ({
-            render
-          }) => render(`<h1>404: Page Not Found</h1>`) 
-        },
-        plugins: [
-          state => {
-            state.index++
-          },
-          state => {
-            document.body.querySelector('code').
-              textContent = JSON.stringify(state, undefined, 2)
-          }
-        ],
-        runtime: change => {
-          const hashchange = () => {
-            console.log('hashchange')
-            change((window.location.hash || '#/').substr(1))
-          }
-
-          window.addEventListener('hashchange', hashchange)
-          hashchange()
-          return () => {
-            window.removeEventListener('hashchange', hashchange)
-          }
+    window.stop = wand({
+      init: () => {
+        const main = document.body.querySelector('main')
+        return {
+          index: 0,
+          home: main.innerHTML.trim(),
+          render: html => {main.innerHTML = html}
         }
-      })
-    </script>
-  </body>
-</html>
+      },
+      routes: {
+        '/': ({
+          render, home
+        }) => render(home),
+        '/hello/:name': ({
+          render, Params
+        }) => render(`<h1>Hello ${Params.name}</h1>`),
+        '/clock': ({render}) => {
+          const tick = () => {
+            console.log('tick')
+            const time = new Date()
+            render(`<h1>${[
+              time.getHours(),
+              time.getMinutes(),
+              time.getSeconds()
+            ].map(n => (n < 10 ? '0' : '')+n).join(':')}</h1>`)
+          }
+          const itv = setInterval(tick, 100)
+          return () => {clearInterval(itv)}
+        },
+        '/goodbye': ({render, Query}) => {
+          render(`<h1>Goodbye message before leaving!</h1>`)
+          return () => {window.alert(`Goodbye ${Query.name}!`)}
+        },
+        '*': ({
+          render
+        }) => render(`<h1>404: Page Not Found</h1>`) 
+      },
+      plugins: [
+        state => {
+          state.index++
+        },
+        state => {
+          document.body.querySelector('code').
+            textContent = JSON.stringify(state, undefined, 2)
+        }
+      ],
+      runtime: change => {
+        const hashchange = () => {
+          console.log('hashchange')
+          change((window.location.hash || '#/').substr(1))
+        }
+
+        window.addEventListener('hashchange', hashchange)
+        hashchange()
+        return () => {
+          window.removeEventListener('hashchange', hashchange)
+        }
+      }
+    })
+  </script>
+</body>
 ```
 
 ## 📖 API

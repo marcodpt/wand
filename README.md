@@ -23,7 +23,7 @@ better than me.
 example can be easily migrated to a server-side router or any other type of
 application.
 
-[Demo](https://marcodpt.github.io/merlin/)
+[Demo](https://marcodpt.github.io/wand/)
 
 ```html
 <html>

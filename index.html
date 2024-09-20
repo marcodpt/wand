@@ -29,9 +29,9 @@
       <code></code>
     </pre>
     <script type="module">
-      import wand from "./index.js"
+      import hashRouter from "./src/runtimes/hashRouter.js"
 
-      window.stop = wand({
+      window.stop = hashRouter({
         init: () => {
           const main = document.body.querySelector('main')
           return {
@@ -76,19 +76,7 @@
             document.body.querySelector('code').
               textContent = JSON.stringify(state, undefined, 2)
           }
-        ],
-        runtime: change => {
-          const hashchange = () => {
-            console.log('hashchange')
-            change((window.location.hash || '#/').substr(1))
-          }
-
-          window.addEventListener('hashchange', hashchange)
-          hashchange()
-          return () => {
-            window.removeEventListener('hashchange', hashchange)
-          }
-        }
+        ]
       })
     </script>
   </body>

@@ -7,13 +7,14 @@
 
 ## ❤️ Features
  - [ES6 module](https://github.com/marcodpt/wand/blob/main/index.js).
- - Support browser and any javascript runtime
-([node](https://nodejs.org/en), [deno](https://deno.com/), etc).
+ - Support
+[browser](https://github.com/marcodpt/wand/blob/main/src/runtimes/hashRouter.js),
+[node](https://nodejs.org/en), [deno](https://deno.com/).
  - Pure functional design.
- - [Tiny codebase](https://github.com/marcodpt/wand/blob/main/src/router.js),
+ - [Tiny codebase](https://github.com/marcodpt/wand/blob/main/src/index.js),
 very understandable.
  - Everything is a
-[plugin](https://github.com/marcodpt/wand/blob/main/src/queryParser.js).
+[plugin](https://github.com/marcodpt/wand/blob/main/src/plugins/queryParser.js).
  - Designed following the principles of
 [UNIX philosophy](https://en.wikipedia.org/wiki/Unix_philosophy).
  - Very well [tested](https://marcodpt.github.io/wand/tests/).
@@ -22,7 +23,7 @@ understand `Wand` better than me.
 
 ## 💻 Usage
 ```js
-import wand from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
+import {wand} from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
 ```
 
 ## 💡 Showcase: A hash router
@@ -55,9 +56,9 @@ application.
     <code></code>
   </pre>
   <script type="module">
-    import wand from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
+    import {hashRouter} from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
 
-    window.stop = wand({
+    window.stop = hashRouter({
       init: () => {
         const main = document.body.querySelector('main')
         return {
@@ -102,19 +103,7 @@ application.
           document.body.querySelector('code').
             textContent = JSON.stringify(state, undefined, 2)
         }
-      ],
-      runtime: change => {
-        const hashchange = () => {
-          console.log('hashchange')
-          change((window.location.hash || '#/').substr(1))
-        }
-
-        window.addEventListener('hashchange', hashchange)
-        hashchange()
-        return () => {
-          window.removeEventListener('hashchange', hashchange)
-        }
-      }
+      ]
     })
   </script>
 </body>

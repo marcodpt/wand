@@ -1,4 +1,4 @@
-import wand from '../index.js'
+import {wand} from '../index.js'
 
 QUnit.test('runtime', assert => {
   const done = assert.async()

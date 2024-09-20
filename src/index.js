@@ -1,5 +1,8 @@
 export default ({init, routes, plugins, runtime}) => {
   const nothing = () => {}
+  init = typeof init == 'function' ? init : nothing
+  plugins = (plugins instanceof Array ? plugins : []).
+    filter(plugin => typeof plugin == 'function')
   var done = nothing
   const state = init() || {}
   var isRunning = true

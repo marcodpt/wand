@@ -1,10 +1,5 @@
-import router from './src/router.js'
-import queryParser from './src/queryParser.js'
+import wand from './src/index.js'
+import queryParser from './src/plugins/queryParser.js'
+import hashRouter from './src/runtimes/hashRouter.js'
 
-export default ({init, routes, plugins, runtime}) => router({
-  init: typeof init == 'function' ? init : (() => ({})),
-  routes,
-  runtime,
-  plugins: [queryParser].concat(plugins || []).
-    filter(plugin => typeof plugin == 'function')
-})
+export {wand, queryParser, hashRouter}

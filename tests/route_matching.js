@@ -1,4 +1,4 @@
-import wand from '../index.js'
+import {wand} from '../index.js'
 
 QUnit.test('route matching', assert => {
   const H = []

@@ -1,4 +1,4 @@
-import wand from '../index.js'
+import {wand, queryParser} from '../index.js'
 
 QUnit.test('query parser', assert => {
   var Query = null
@@ -10,6 +10,7 @@ QUnit.test('query parser', assert => {
         Query = state.Query
       } 
     },
+    plugins: [queryParser],
     runtime: change => {
       assert.deepEqual(Query, null)
       assert.deepEqual(query, null)

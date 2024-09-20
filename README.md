@@ -225,6 +225,10 @@ values in the current `path`.
 #### query: string
 The part of `url` after the `?`.
 
+## ⭐ Support
+If this project was useful to you, consider giving it a star on github, it's a
+way to increase evidence and attract more contributors.
+
 ## 📦 Projects using this module
 If your project is not on the list, submit a pull request, it is a way to
 increase awareness of your project and this module.
@@ -234,10 +238,29 @@ values elegance, simplicity and minimalism.
  - [Paw](https://github.com/marcodpt/paw): A low-code, vdom-free hyperscript
 framework.
 
+## 🪟 Alternatives
+This list of alternatives serves to find the most suitable module for your
+project but also and mainly to serve as a reference for implementation ideas
+and improvements. All contributions are welcome.
+
+ - [universal-router](https://github.com/kriasoft/universal-router): A simple middleware-style router for isomorphic JavaScript web apps 
+ - [director](https://github.com/flatiron/director): A tiny and isomorphic URL router for JavaScript.
+ - [page.js](https://github.com/visionmedia/page.js): Micro client-side router inspired by the Express router (~1200 bytes).
+ - [pathjs](https://github.com/mtrpcic/pathjs): Simple, lightweight routing for web browsers.
+ - [crossroads](https://github.com/millermedeiros/crossroads.js): JavaScript Routes.
+ - [davis.js](https://github.com/olivernn/davis.js): RESTful degradable JavaScript routing using pushState.
+ - [router](https://github.com/progrape/router): A very simple router for the demo of WeUI
+ - [navigo](https://github.com/krasimir/navigo): A simple vanilla JavaScript router.
+ - [router.js](https://github.com/tildeio/router.js/)
+ - [slim-router](https://github.com/haithembelhaj/slim-router): A Javascript Router based on History.js
+ - [router.js](https://github.com/ramiel/router.js/): Router.js is a simple and powerful javascript library to handle routing
+ - [router](https://github.com/vaadin/router): Small and powerful client-side router for Web Components. Framework-agnostic.
+ - [react-router](https://github.com/remix-run/react-router): Declarative routing for React
+ - [vue-router](https://github.com/vuejs/vue-router): The official router for Vue 2
+ - [ui-router](https://github.com/ui-router/angular): UI-Router for Angular: State-based routing for Angular (v2+)
+ - [express](https://github.com/expressjs/express): Fast, unopinionated, minimalist web framework for node.
+ - [koa-route](https://github.com/koajs/route): Simple route middleware
+
 ## 🤝 Contributing
 It's a very simple project.
 Any contribution, any feedback is greatly appreciated.
-
-## ⭐ Support
-If this project was useful to you, consider giving it a star on github, it's a
-way to increase evidence and attract more contributors.

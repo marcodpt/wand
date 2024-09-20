@@ -4,6 +4,7 @@
 
   [![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/wand/)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![bundlejs](https://deno.bundlejs.com/badge?q=https://raw.githubusercontent.com/marcodpt/wand/main/index.js&treeshake=[*])](https://bundlejs.com/?q=https://raw.githubusercontent.com/marcodpt/wand/main/index.js&treeshake=[*])
 
 ## ❤️ Features
  - [ES6 module](https://github.com/marcodpt/wand/blob/main/index.js).
@@ -118,8 +119,8 @@ import {hashRouter} from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
 ```
 
 ### Building your own runtime
-This example is for the user to create their own runtime and eventually make
-use of plugins.
+This example is for those who want a more customized experience to create
+their own `runtime` and eventually make use of `plugins`.
 
 ```js
 import {wand, queryParser} from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
@@ -138,14 +139,14 @@ default.
 [![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/wand/blob/main/src/runtimes/hashRouter.js)
 
 ### plugin: state => ()
-Plugins perform actions with each change of route, and were designed to be easy
-to develop without changing the way the `Wand` core works.
+`Plugins` can modify the `state` with each change of route, and were designed
+to be easy to develop without changing the way the `Wand` core works.
 
 Enabling maximum flexibility and contributions.
 
 #### queryParser
 The default parser for query string due to its simplicity.
-Adds the `Query` property to the state.
+Adds the `Query` property to the `state`.
 
 ##### Query: object
 Parsed query string.

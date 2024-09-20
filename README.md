@@ -14,17 +14,15 @@
  - [Tiny codebase](https://github.com/marcodpt/wand/blob/main/src/index.js),
 very understandable.
  - Everything is a
-[plugin](https://github.com/marcodpt/wand/blob/main/src/plugins/queryParser.js).
+[plugin](https://github.com/marcodpt/wand/blob/main/src/plugins/).
+ - Pre-built
+[runtimes](https://github.com/marcodpt/wand/blob/main/src/runtimes/)
+for easy use.
  - Designed following the principles of
 [UNIX philosophy](https://en.wikipedia.org/wiki/Unix_philosophy).
  - Very well [tested](https://marcodpt.github.io/wand/tests/).
  - Ridiculously small [API](#-api). After reading this file you will
 understand `Wand` better than me.
-
-## 💻 Usage
-```js
-import {wand} from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
-```
 
 ## 💡 Showcase: A hash router
 
@@ -109,9 +107,57 @@ application.
 </body>
 ```
 
+## 💻 Usage
+
+### Hash router in the browser.
+This example already makes use of the `queryParser` `plugin` and
+implements the `runtime` of a hash router.
+
+```js
+import {hashRouter} from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
+```
+
+### Building your own runtime
+This example is for the user to create their own runtime and eventually make
+use of plugins.
+
+```js
+import {wand, queryParser} from "https://cdn.jsdelivr.net/gh/marcodpt/wand/index.js"
+```
+
 ## 📖 API
 
-### wand({init?, routes, plugins?, runtime}) => stop
+### runtimes: ({init?, routes, plugins?}) => stop
+`Runtimes` are thin layers built on top of `Wand` with the aim of bringing
+simplicity to a specific use, they are open to contributions.
+
+#### hashRouter
+Made to be used in the browser, it already has the `queryParser` plugin by
+default.
+
+[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/wand/blob/main/src/runtimes/hashRouter.js)
+
+### plugin: state => ()
+Plugins perform actions with each change of route, and were designed to be easy
+to develop without changing the way the `Wand` core works.
+
+Enabling maximum flexibility and contributions.
+
+#### queryParser
+The default parser for query string due to its simplicity.
+Adds the `Query` property to the state.
+
+##### Query: object
+Parsed query string.
+
+[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/wand/blob/main/src/plugins/queryParser.js)
+
+### wand: ({init?, routes, plugins?, runtime}) => stop
+`Runtimes` are built on top of the library.
+And the `plugins` are designed for it.
+
+The idea is to bring a simple router to your core but at the same time with a
+complete `plugin` system and easy-to-use `runtimes`.
 
 #### init: () => state
 Optional function called once to create the initial `state`
@@ -174,9 +220,6 @@ values in the current `path`.
 
 #### query: string
 The part of `url` after the `?`.
-
-#### Query: object
-Parsed query string.
 
 ## 📦 Projects using this module
 If your project is not on the list, submit a pull request, it is a way to

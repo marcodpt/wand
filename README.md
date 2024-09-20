@@ -149,10 +149,10 @@ Enabling maximum flexibility and contributions.
 The default parser for query string due to its simplicity.
 Adds the `Query` property to the `state`.
 
+[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/wand/blob/main/src/plugins/queryParser.js)
+
 ##### Query: object
 Parsed query string.
-
-[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/wand/blob/main/src/plugins/queryParser.js)
 
 ### wand: ({init?, routes, plugins?, runtime}) => stop
 `Runtimes` are built on top of the library.
@@ -160,6 +160,8 @@ And the `plugins` are designed for it.
 
 The idea is to bring a simple router to your core but at the same time with a
 complete `plugin` system and easy-to-use `runtimes`.
+
+[![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/wand/blob/main/src/index.js)
 
 #### init: () => state
 Optional function called once to create the initial `state`

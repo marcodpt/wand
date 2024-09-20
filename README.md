@@ -4,6 +4,7 @@
 
   [![Demo](https://img.shields.io/badge/Demo-blue)](https://marcodpt.github.io/wand/)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![GitHub Tag](https://img.shields.io/github/v/tag/marcodpt/wand)](https://github.com/marcodpt/wand/tags)
   [![bundlejs](https://deno.bundlejs.com/badge?q=https://raw.githubusercontent.com/marcodpt/wand/main/index.js&treeshake=[*])](https://bundlejs.com/?q=https://raw.githubusercontent.com/marcodpt/wand/main/index.js&treeshake=[*])
 
 ## ❤️ Features

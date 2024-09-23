@@ -6,7 +6,6 @@ export default ({plugins, ...router}) => wand({
   plugins: [queryParser].concat(plugins),
   runtime: change => {
     const hashchange = () => {
-      console.log('hashchange')
       change((window.location.hash || '#/').substr(1))
     }
 

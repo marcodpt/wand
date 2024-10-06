@@ -189,7 +189,7 @@ associated with the new `route` or the `done` function associated with the old
 #### runtime: change => finish?
 The router `runtime`.
 
-##### change: url => ()
+##### change: url => done
 Whenever called, it will trigger a `change` of `route`, with the
 `url` (`string`) being associated with the `state`.
 

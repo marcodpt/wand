@@ -57,8 +57,9 @@ export default ({init, routes, plugins, runtime}) => {
       state.query = query
       plugins.forEach(plugin => plugin(state))
       done(state)
-      done = action(state)
-      done = typeof done != 'function' ? nothing : done
+      const response = action(state)
+      done = typeof response != 'function' ? nothing : response
+      return response
     }
   }
 

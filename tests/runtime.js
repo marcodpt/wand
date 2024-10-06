@@ -26,12 +26,12 @@ QUnit.test('runtime', assert => {
         'init'
       ])
 
-      change('c')
+      assert.deepEqual(change('c'), undefined)
       assert.deepEqual(H, [
         'init'
       ])
 
-      change('a')
+      assert.deepEqual(typeof change('a'), "function")
       assert.deepEqual(H, [
         'init',
         'p1: a',
@@ -39,7 +39,7 @@ QUnit.test('runtime', assert => {
         'a (action): a'
       ])
 
-      change('b')
+      assert.deepEqual(typeof change('b'), "function")
       assert.deepEqual(H, [
         'init',
         'p1: a',
@@ -51,7 +51,7 @@ QUnit.test('runtime', assert => {
         'b (action): b'
       ])
 
-      change('c')
+      assert.deepEqual(change('c'), undefined)
       assert.deepEqual(H, [
         'init',
         'p1: a',
@@ -63,7 +63,7 @@ QUnit.test('runtime', assert => {
         'b (action): b'
       ])
 
-      change('b')
+      assert.deepEqual(typeof change('b'), "function")
       assert.deepEqual(H, [
         'init',
         'p1: a',
@@ -79,7 +79,7 @@ QUnit.test('runtime', assert => {
         'b (action): b'
       ])
 
-      change('a')
+      assert.deepEqual(typeof change('a'), "function")
       assert.deepEqual(H, [
         'init',
         'p1: a',
@@ -99,7 +99,7 @@ QUnit.test('runtime', assert => {
         'a (action): a'
       ])
 
-      change('a')
+      assert.deepEqual(typeof change('a'), "function")
       assert.deepEqual(H, [
         'init',
         'p1: a',
@@ -123,7 +123,7 @@ QUnit.test('runtime', assert => {
         'a (action): a'
       ])
 
-      change('c')
+      assert.deepEqual(change('c'), undefined)
       assert.deepEqual(H, [
         'init',
         'p1: a',
@@ -174,7 +174,7 @@ QUnit.test('runtime', assert => {
           'finish'
         ])
 
-        change('c')
+        assert.deepEqual(change('c'), undefined)
         assert.deepEqual(H, [
           'init',
           'p1: a',
@@ -200,7 +200,7 @@ QUnit.test('runtime', assert => {
           'finish'
         ])
 
-        change('b')
+        assert.deepEqual(change('b'), undefined)
         assert.deepEqual(H, [
           'init',
           'p1: a',
@@ -226,7 +226,7 @@ QUnit.test('runtime', assert => {
           'finish'
         ])
 
-        change('a')
+        assert.deepEqual(change('a'), undefined)
         assert.deepEqual(H, [
           'init',
           'p1: a',

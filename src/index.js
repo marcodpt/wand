@@ -7,7 +7,7 @@ export default ({init, routes, plugins, runtime}) => {
   const state = init() || {}
   var isRunning = true
 
-  const change = url => {
+  const change = (url, ...args) => {
     if (!isRunning) {
       return
     }
@@ -57,7 +57,7 @@ export default ({init, routes, plugins, runtime}) => {
       state.query = query
       plugins.forEach(plugin => plugin(state))
       done(state)
-      const response = action(state)
+      const response = action(state, ...args)
       done = typeof response != 'function' ? nothing : response
       return response
     }

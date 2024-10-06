@@ -16,7 +16,7 @@ export default ({plugins, port, cert, key, routes, ...router}) => wand({
       key
     }, request => {
       const url = new URL(request.url)
-      return change(url.pathname+url.search)
+      return change(url.pathname+url.search, request)
     })
   }
 })

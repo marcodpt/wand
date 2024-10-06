@@ -8,11 +8,13 @@ QUnit.test('runtime', assert => {
   const stop = wand({
     init: () => {H.push('init')},
     routes: {
-      'a': ({url}) => {
+      'a': ({url}, ...args) => {
+        assert.deepEqual(args, ['pi', 3.14])
         H.push('a (action): '+url)
         return ({url}) => {H.push('a (done): '+url)}
       },
-      'b': ({url}) => {
+      'b': ({url}, ...args) => {
+        assert.deepEqual(args, [])
         H.push('b (action): '+url)
         return ({url}) => {H.push('b (done): '+url)}
       }
@@ -31,7 +33,7 @@ QUnit.test('runtime', assert => {
         'init'
       ])
 
-      assert.deepEqual(typeof change('a'), "function")
+      assert.deepEqual(typeof change('a', 'pi', 3.14), "function")
       assert.deepEqual(H, [
         'init',
         'p1: a',
@@ -79,7 +81,7 @@ QUnit.test('runtime', assert => {
         'b (action): b'
       ])
 
-      assert.deepEqual(typeof change('a'), "function")
+      assert.deepEqual(typeof change('a', 'pi', 3.14), "function")
       assert.deepEqual(H, [
         'init',
         'p1: a',
@@ -99,7 +101,7 @@ QUnit.test('runtime', assert => {
         'a (action): a'
       ])
 
-      assert.deepEqual(typeof change('a'), "function")
+      assert.deepEqual(typeof change('a', 'pi', 3.14), "function")
       assert.deepEqual(H, [
         'init',
         'p1: a',

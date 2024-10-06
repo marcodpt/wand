@@ -140,7 +140,7 @@ default.
 [![Source](https://img.shields.io/badge/Source-gray)](https://github.com/marcodpt/wand/blob/main/src/runtimes/hashRouter.js)
 
 ### plugin: state => ()
-`Plugins` can modify the `state` with each change of route, and were designed
+`Plugins` can modify the `state` with each `change` of route, and were designed
 to be easy to develop without changing the way the `Wand` core works.
 
 Enabling maximum flexibility and contributions.
@@ -173,12 +173,19 @@ Object that defines the possible `routes`.
 ##### route: string
 Accepts `*` to match any path and `:param` to declare variable.
 
-##### action: state => done?
+##### action: (state, ...args) => done | response
 A function that will be called whenever `route` is matched in a route `change`.
+
+All other `args` passed by the `change` function will be passed to the
+`action`.
 
 ##### done: state => ()
 An optional function that will be called before the new `route` `action`, with
 the `state` of the new `route` to end the current `route`.
+
+##### response: any
+If it is not a `done` function, it will be treated as a `response` and
+returned in the `change` function.
 
 #### plugins: [state => ()]
 An optional array of `plugins`, which are executed sequentially with each
@@ -189,9 +196,11 @@ associated with the new `route` or the `done` function associated with the old
 #### runtime: change => finish?
 The router `runtime`.
 
-##### change: url => done
+##### change: (url, ...args) => response
 Whenever called, it will trigger a `change` of `route`, with the
 `url` (`string`) being associated with the `state`.
+
+All other `args` will be passed to the `action`.
 
 ##### finish: state => ()
 Optional function to terminate the `runtime`, receives the current `state` of

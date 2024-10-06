@@ -1,12 +1,8 @@
 import queryParser from '../plugins/queryParser.js'
 import wand from '../index.js'
 
-export default ({plugins, port, cert, key, routes, ...router}) => wand({
+export default ({plugins, port, cert, key, ...router}) => wand({
   ...router,
-  routes: {
-    '*': () => new Response("Not Found", {status: 404}),
-    ...routes
-  },
   plugins: [queryParser].concat(plugins),
   runtime: change => {
     const server = Deno.serve({
@@ -16,7 +12,7 @@ export default ({plugins, port, cert, key, routes, ...router}) => wand({
       key
     }, request => {
       const url = new URL(request.url)
-      return change(url.pathname+url.search, request)
+      return change(request.method+' '+url.pathname+url.search, request)
     })
   }
 })
